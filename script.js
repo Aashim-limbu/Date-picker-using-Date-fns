@@ -24,7 +24,7 @@ const datePicker = document.querySelector(".date-picker");
 const nextMonth = document.querySelector(".next-month-button");
 const prevMonth = document.querySelector(".prev-month-button");
 const currentMonth = document.querySelector(".current-month");
-const dateGrid = document.querySelector('.date-picker-grid-dates')
+const dateGrid = document.querySelector(".date-picker-grid-dates");
 setupbutton(currentDate);
 //show the calender popup
 dateBtn.addEventListener("click", (e) => {
@@ -34,38 +34,39 @@ function setupbutton(date) {
   dateBtn.innerText = format(date, "	MMMM do, yyy");
   currentMonth.innerText = format(date, "	MMMM - YYY");
   currentMonth.dataset.month = getUnixTime(date);
-  setUpDatePicker(currentDate)
+  setUpDatePicker(currentDate);
 }
 nextMonth.addEventListener("click", (e) => {
   const tempDate = addMonths(fromUnixTime(currentMonth.dataset.month), 1);
   currentMonth.innerText = format(tempDate, "	MMMM - YYY");
   currentMonth.dataset.month = getUnixTime(tempDate);
-  setUpDatePicker(tempDate)
+  setUpDatePicker(tempDate);
 });
 prevMonth.addEventListener("click", (e) => {
   const tempDate = addMonths(fromUnixTime(currentMonth.dataset.month), -1);
   currentMonth.innerText = format(tempDate, "	MMMM - YYY");
   currentMonth.dataset.month = getUnixTime(tempDate);
-  setUpDatePicker(tempDate)
+  setUpDatePicker(tempDate);
 });
 
 //render the calender dates
 function setUpDatePicker(selectedDate) {
-  dateGrid.innerHTML = ''
+  dateGrid.innerHTML = "";
   const firstWeekDay = startOfWeek(startOfMonth(selectedDate));
-  const lastWeekDay = endOfWeek(endOfMonth(selectedDate))
-  const dates = eachDayOfInterval({start:firstWeekDay,end:lastWeekDay})
-  dates.forEach(date=>{
-    const newBtn = document.createElement('button')
-    newBtn.innerText = format (date,'d')
-    newBtn.classList.add('date')
-    if(!isSameMonth(date, selectedDate))newBtn.classList.add('date-picker-other-month-date')
-    if(isSameDay(date, currentDate)) newBtn.classList.add('selected')
-    newBtn.addEventListener('click',e=>{
-      newBtn.classList.add('selected')
-      currentDate = date
-      setupbutton(currentDate)
-    })
-    dateGrid.append(newBtn)
-  })
+  const lastWeekDay = endOfWeek(endOfMonth(selectedDate));
+  const dates = eachDayOfInterval({ start: firstWeekDay, end: lastWeekDay });
+  dates.forEach((date) => {
+    const newBtn = document.createElement("button");
+    newBtn.innerText = format(date, "d");
+    newBtn.classList.add("date");
+    if (!isSameMonth(date, selectedDate))
+      newBtn.classList.add("date-picker-other-month-date");
+    if (isSameDay(date, currentDate)) newBtn.classList.add("selected");
+    newBtn.addEventListener("click", (e) => {
+      newBtn.classList.add("selected");
+      currentDate = date;
+      setupbutton(currentDate);
+    });
+    dateGrid.append(newBtn);
+  });
 }
