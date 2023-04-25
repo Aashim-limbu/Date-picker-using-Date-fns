@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "date-fns": "^2.29.3"
+  },
+  "name": "project-datepicker",
+  "version": "1.0.0",
+  "main": "script.js",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
